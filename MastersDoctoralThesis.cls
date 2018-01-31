@@ -1,9 +1,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Masters/Doctoral Thesis 
 % Class File
-% Version 1.6 (27/8/17)
+% Version 1.5 (22/11/16)
 %
-% This class was downloaded from:
+% This class has been downloaded from:
 % http://www.LaTeXTemplates.com
 %
 % Authors:
@@ -29,6 +29,7 @@
 \newcommand{\classname}{MastersDoctoralThesis}
 \ProvidesClass{\classname}[2016/11/22 v1.5 LaTeXTemplates.com]
 \providecommand{\baseclass}{book}
+
 \RequirePackage{etoolbox}
 \RequirePackage{xparse}
 \newbool{nolistspace}
@@ -55,8 +56,8 @@
 
 \LoadClass{\baseclass}
 
-%  Simple interface for the user  to customize the chapter titles 
-\ProvideDocumentCommand{\abovechapterskip}{}{\vspace*{20pt}}
+%  Simple interface for the user to customize the chapter titles 
+\ProvideDocumentCommand{\abovechapterskip}{}{\vspace*{1pt}}
 \ProvideDocumentCommand{\chapterbelowskip}{}{\vspace*{40pt}}
 \ProvideDocumentCommand{\chapterinbetweenskip}{}{\vspace*{20pt}}
 \ProvideDocumentCommand{\autodot}{}{}
@@ -82,7 +83,6 @@
 		\chapterfont #1\par\nobreak
 		\chapterbelowskip
 	}
-	\thispagestyle{\chapter@p@gestyle}
 }
 \def\@makeschapterhead#1{%
 	\abovechapterskip
@@ -92,7 +92,6 @@
 		\chapterfont  #1\par\nobreak
 		\chapterbelowskip
 	}
-	\thispagestyle{\chapter@p@gestyle}
 }
 
 
@@ -201,28 +200,36 @@
 \RequirePackage{booktabs} % Required for better table rules
 
 \RequirePackage{caption} % Required for customising the captions
-\captionsetup{justification=centerlast,font=small,labelfont=sc,margin=50pt}
+
+\RequirePackage{tocloft} % Required for customizing the list/table of tables/figures/contents
+\usepackage[bottom]{footmisc}
+\usepackage{textcomp}
+\usepackage{wrapfig}
+\captionsetup{justification=justified,font=small,labelfont=sc,margin=50pt}
 
 %----------------------------------------------------------------------------------------
 %	DEFINE CUSTOM THESIS INFORMATION COMMANDS
 %----------------------------------------------------------------------------------------
 
-\NewDocumentCommand{\thesistitle} { o m }{%
- \IfValueTF{#1}{\def\shorttitle{#1}}{\def\shorttitle{#2}}%
- \def\@title{#2}%
- \def\ttitle{#2}%
+\DeclareDocumentCommand{\thesistitle} { o m }{
+	\IfBooleanTF{#1} {\DeclareDocumentCommand{\shorttitle}{ }{#1}
+	{\DeclareDocumentCommand{\shorttitle}{}{#2}}}
+	\DeclareDocumentCommand{\@title}{ }{#2}
+	\DeclareDocumentCommand{\ttitle}{ }{#2}
 }
-\DeclareDocumentCommand{\author}{m}{\newcommand{\authorname}{#1}\renewcommand{\@author}{#1}}
-\NewDocumentCommand{\supervisor}{m}{\newcommand{\supname}{#1}}
-\NewDocumentCommand{\examiner}{m}{\newcommand{\examname}{#1}}
-\NewDocumentCommand{\degree}{m}{\newcommand{\degreename}{#1}}
-\NewDocumentCommand{\addresses}{m}{\newcommand{\addressname}{#1}}
-\NewDocumentCommand{\university}{m}{\newcommand{\univname}{#1}}
-\NewDocumentCommand{\department}{m}{\newcommand{\deptname}{#1}}
-\NewDocumentCommand{\group}{m}{\newcommand{\groupname}{#1}}
-\NewDocumentCommand{\faculty}{m}{\newcommand{\facname}{#1}}
-\NewDocumentCommand{\subject}{m}{\newcommand{\subjectname}{#1}}
-\NewDocumentCommand{\keywords}{m}{\newcommand{\keywordnames}{#1}}
+\DeclareDocumentCommand { \author     } { m } { \DeclareDocumentCommand    { \authorname } { } {#1}
+\DeclareDocumentCommand { \@author    } {   } {#1}   }
+\NewDocumentCommand     { \supervisorone} { m } { \DeclareDocumentCommand { \supnameone      } { } {#1}  }
+\NewDocumentCommand     { \supervisortwo} { m } { \DeclareDocumentCommand { \supnametwo      } { } {#1}  }
+\NewDocumentCommand     { \examiner   } { m } { \DeclareDocumentCommand { \examname      } { } {#1}  }
+\NewDocumentCommand     { \degree     } { m } { \DeclareDocumentCommand { \degreename    } { } {#1}  }
+\NewDocumentCommand     { \addresses  } { m } { \DeclareDocumentCommand { \addressname   } { } {#1}  }
+\NewDocumentCommand     { \university } { m } { \DeclareDocumentCommand { \univname      } { } {#1}  }
+\NewDocumentCommand     { \department } { m } { \DeclareDocumentCommand { \deptname      } { } {#1}  }
+\NewDocumentCommand     { \group      } { m } { \DeclareDocumentCommand { \groupname     } { } {#1}  }
+\NewDocumentCommand     { \faculty    } { m } { \DeclareDocumentCommand { \facname       } { } {#1}  }
+\NewDocumentCommand     { \subject    } { m } { \DeclareDocumentCommand { \subjectname   } { } {#1}  }
+\NewDocumentCommand     { \keywords   } { m } { \DeclareDocumentCommand { \keywordnames  } { } {#1}  }
 
 \newcommand{\checktoopen}{% New command to move content to the next page which prints to the next odd page if twosided mode is active  
 	\if@openright\cleardoublepage\else\clearpage\fi
@@ -233,6 +240,7 @@
 \NewDocumentCommand{\tttypeout}{m}{\bhrule\typeout{\space #1}\bhrule}
 
 \newcommand{\HRule}{\rule{.9\linewidth}{.6pt}} % New command to make the lines in the title page
+\newcommand{\LineRule}{\rule{1\linewidth}{.6pt}} % New command to make the lines in the title page
 \newcommand{\decoRule}{\rule{.8\textwidth}{.4pt}} % New command for a rule to be used under figures
 
 \setcounter{tocdepth}{3} % The depth to which the document sections are printed to the table of contents
@@ -285,14 +293,14 @@
 \ifoot{}% Inner footer
 \ofoot{}% Outer footer
 \pagestyle{thesisSimple}
-\providepairofpagestyles[thesisSimple]{thesis}{%
+\providepairofpagestyles[thesisSimple]{scrheadings}{%
 	\automark*[section]{}%
 }
 \providepairofpagestyles[thesisSimple]{review}{%
 	\ofoot[\shorttitle/\authorname]{\shorttitle/\authorname}
 	\ifoot[\today]{\today}
 }
-\pagestyle{thesis}
+\pagestyle{scrheadings}
 \ifbool{headsepline}{\KOMAoption{headsepline}{true}}{}
 \PreventPackageFromLoading[\ClassError{\classname}{Package `fancyhdr' is
 incompatible\MessageBreak with this class}{The pagesyles are defined 
@@ -300,14 +308,12 @@ incompatible\MessageBreak with this class}{The pagesyles are defined
 KOMA-script documentation for details.}]{fancyhdr}
 
 
-\newcommand{\blank@p@gestyle}{empty}
-\newcommand{\chapter@p@gestyle}{plain}
+\NewDocumentCommand{\blank@p@gestyle}{}{empty}
 \NewDocumentCommand{\blankpagestyle}{ m }{%
 	\ClassWarning{\classname}{\string\blankpagestyle\space is
-	obsolete,\MessageBreak use \string\setblankpagestyle \space  instead}\renewcommand{\blank@p@gestyle}{}{#1}
+	obsolete,\MessageBreak use \string\setblankpagestyle \space  instead}\DeclareDocumentCommand{\blank@p@gestyle}{}{#1}
 }
-\NewDocumentCommand{\setblankpagestyle}{ m }{\renewcommand{\blank@p@gestyle}{#1}}
-\NewDocumentCommand{\setchapterpagestyle}{ m }{\renewcommand{\chapter@p@gestyle}{#1}}
+\NewDocumentCommand{\setblankpagestyle}{ m }{\DeclareDocumentCommand{\blank@p@gestyle}{}{#1}}
 
 \DeclareDocumentCommand\cleardoublepage{}{\clearpage\if@twoside \ifodd\c@page\else
 	\hbox{}
@@ -316,93 +322,65 @@ KOMA-script documentation for details.}]{fancyhdr}
 	\if@twocolumn\hbox{}\newpage\fi\fi\fi%
 }
 
+
 %----------------------------------------------------------------------------------------
 %	ABBREVIATIONS PAGE DESIGN
 %----------------------------------------------------------------------------------------
 
 \newcommand{\abbrevname}{List of Abbreviations}
 \providecaptionname{english,british,american}{\abbrevname}{List of Abbreviations}
-\providecaptionname{ngerman,german,austrian,naustrian}{\abbrevname}{Abk\"urzungsverzeichnis}
+
 \NewDocumentEnvironment{abbreviations}{ m }{%
-	\ifbool{nolistspace}{\begingroup\singlespacing}{}
-	\ifbool{listtoc}{\addchap{\abbrevname}}{\addchap*{\abbrevname}}
+	\newpage
+    \tttypeout{abbrevname}
+    \thispagestyle{plain}
+    \begin{flushleft}
+		\LineRule \\[0.1cm] % Horizontal line
+		{\huge \abbrevname\par} % Thesis title
+		\LineRule \\[0.1cm] % Horizontal line
+	\end{flushleft}    
+    {
+    	\vfil\vfil\null 
+    }    
 	\begin{longtable}{#1}
 	}{%
 	\end{longtable}
-	\addtocounter{table}{-1}% Don't count this table as one of the document tables
-	\ifbool{nolistspace}{\endgroup}{}
+	\addtocounter{table}{-1} % Don't count this table as one of the document tables
 }
 
 %----------------------------------------------------------------------------------------
 %	ABSTRACT PAGE DESIGN
 %----------------------------------------------------------------------------------------
-
-\DeclareDocumentCommand{\abstractauthorfont}{}{}
-\DeclareDocumentCommand{\abstracttitlefont}{}{}
-\newcommand{\byname}{by}
+\usepackage{xcolor}
+\colorlet{mdtRed}{red!50!black}
 \newcommand{\abstractname}{Abstract}
-\providecaptionname{german,ngerman,austrian,naustrian}{\byname}{von}
-\providecaptionname{american,australian,british,canadian,english,newzealand,UKenglish,USenglish}{\byname}{by}
+\providecaptionname{american,australian,british,canadian,english,newzealand,UKenglish,USenglish} {\abstractname}{Abstract} % Acknowledgement text for English countries
+
+
 \ifbool{consistentlayout}{
-	\DeclareDocumentEnvironment{abstract}{ O{} }{%
-		\addchap*{\abstractname}%
-		{\chapteralign\normalsize\abstractauthorfont \authorname \par}% Author name
-		\vspace{\baselineskip}
-		{\chapteralign\parbox{.7\linewidth}{\chapteralign\normalsize\itshape\abstracttitlefont\@title}\par}% Thesis title
-		\bigskip\noindent\ignorespaces
-	}%
-	{}%end alt-abstract
-}{%
-	\DeclareDocumentEnvironment{abstract}{ O{\null\vfill} }{
+	\DeclareDocumentEnvironment{abstract}{}{%
+		\tttypeout{\abstractname}
+		\addchap*{\abstractname}
+	}
+}
+{
+	\DeclareDocumentEnvironment{abstract}{}{%
 		\checktoopen
 		\tttypeout{\abstractname}
-		#1%added to be able to have abstract more than one page long
 		\thispagestyle{plain}
 		\begin{center}
-			{\normalsize \MakeUppercase{\univname} \par}% University name in capitals
-			\bigskip
-			{\huge\textit{\abstractname} \par}
-			\bigskip
-			{\normalsize \facname \par}% Faculty name
-			{\normalsize \deptname \par}% Department name
-			\bigskip
-			{\normalsize \degreename\par}% Degree name
-			\bigskip
-			{\normalsize\bfseries \@title \par}% Thesis title
-			\medskip
-			{\normalsize \byname{} \authorname \par}% Author name
-			\bigskip
+        \begin{flushleft}
+			\LineRule \\[0.1cm] % Horizontal line
+			{\huge \abstractname\par} % Thesis title
+			\LineRule \\[0.1cm] % Horizontal line
+		\end{flushleft}
 		\end{center}
 	}
 	{
-		\vfill\null
+		\vfil\vfil\null
 	}
 }
 
-\DeclareDocumentEnvironment{extraAbstract}{ O{\null\vfill} }{
-	\checktoopen
-	\tttypeout{\abstractname}
-	#1%added to be able to have abstract more than one page long
-	\thispagestyle{empty}
-	\begin{center}
-		{\normalsize \MakeUppercase{\univname} \par}% University name in capitals
-		\bigskip
-		{\huge\textit{\abstractname} \par}
-		\bigskip
-		{\normalsize \facname \par}% Faculty name
-		{\normalsize \deptname \par}% Department name
-		\bigskip
-		{\normalsize \degreename\par}% Degree name
-		\bigskip
-		{\normalsize\bfseries \@title \par}% Thesis title
-		\medskip
-		{\normalsize \byname{} \authorname \par}% Author name
-		\bigskip
-	\end{center}
-}
-{
-	\vfill\null
-}
 
 %----------------------------------------------------------------------------------------
 %	ACKNOWLEDGEMENTS PAGE DESIGN
@@ -425,7 +403,13 @@ KOMA-script documentation for details.}]{fancyhdr}
 		\checktoopen
 		\tttypeout{\acknowledgementname}
 		\thispagestyle{plain}
-		\begin{center}{\huge\textit{\acknowledgementname}\par}\end{center}
+		\begin{center}
+        \begin{flushleft}
+			\LineRule \\[0.1cm] % Horizontal line
+			{\huge \acknowledgementname\par} % Thesis title
+			\LineRule \\[0.1cm] % Horizontal line
+		\end{flushleft}
+		\end{center}
 	}
 	{
 		\vfil\vfil\null
@@ -481,18 +465,29 @@ KOMA-script documentation for details.}]{fancyhdr}
 %----------------------------------------------------------------------------------------
 %	PHYSICAL CONSTANTS PAGE DESIGN
 %----------------------------------------------------------------------------------------
-
-\newcommand{\constantsname}{Physical Constants}
-\providecaptionname{english,british,american}{\constantsname}{Physical Constants}
-\providecaptionname{ngerman,german,austrian,naustrian}{\constantsname}{Physikalische Konstanten}
+\usepackage{xcolor}
+\colorlet{mdtRed}{red!50!black}
+\newcommand{\constantssname}{List of Constants}
+\providecaptionname{english,british,american}{\constantsname}{List of Constants}
 
 \NewDocumentEnvironment{constants}{ m }{%
-	\ifbool{nolistspace}{\begingroup\singlespacing}{}
-	\ifbool{listtoc}{\addchap{\constantsname}}{\addchap*{\constantsname}}
+	\newpage
+    \tttypeout{constantssname}
+    \thispagestyle{plain}
+    \begin{flushleft}
+		\LineRule \\[0.1cm] % Horizontal line
+		{\huge \constantsname\par} % Thesis title
+		\LineRule \\[0.1cm] % Horizontal line
+	\end{flushleft}
+	
+    
+    {
+    	\vfil\vfil\null 
+    }
 	\begin{longtable}{#1}
 	}{%
 	\end{longtable}
-	\addtocounter{table}{-1}% Don't count this table as one of the document tables
+	\addtocounter{table}{-1} % Don't count this table as one of the document tables
 	\ifbool{nolistspace}{\endgroup}{}
 }
 
@@ -502,15 +497,25 @@ KOMA-script documentation for details.}]{fancyhdr}
 
 \newcommand{\symbolsname}{List of Symbols}
 \providecaptionname{english,british,american}{\symbolsname}{List of Symbols}
-\providecaptionname{ngerman,german,austrian,naustrian}{\symbolsname}{Symbolverzeichnis}
 
 \NewDocumentEnvironment{symbols}{ m }{%
-	\ifbool{nolistspace}{\begingroup\singlespacing}{}
-	\ifbool{listtoc}{\addchap{\symbolsname}}{\addchap*{\symbolsname}}
+	\newpage
+    \tttypeout{symbolsname}
+    \thispagestyle{plain}
+    \begin{flushleft}
+		\LineRule \\[0.1cm] % Horizontal line
+		{\huge \symbolsname\par} % Thesis title
+		\LineRule \\[0.1cm] % Horizontal line
+	\end{flushleft}
+	
+    
+    {
+    	\vfil\vfil\null 
+    }
 	\begin{longtable}{#1}
 	}{%
 	\end{longtable}
-	\addtocounter{table}{-1}% Don't count this table as one of the document tables
+	\addtocounter{table}{-1} % Don't count this table as one of the document tables
 	\ifbool{nolistspace}{\endgroup}{}
 }
 
@@ -522,10 +527,10 @@ KOMA-script documentation for details.}]{fancyhdr}
 bookmarksopen=true,
 bookmarksopenlevel=0,
 hypertexnames=false,
-colorlinks=true,% Set to false to disable coloring links
-citecolor=magenta,% The color of citations
-linkcolor=red,% The color of references to document elements (sections, figures, etc)
-urlcolor=mdtRed,% The color of hyperlinks (URLs)
+colorlinks=false, % Set to false to disable coloring links
+citecolor=magenta, % The color of citations
+linkcolor=red, % The color of references to document elements (sections, figures, etc)
+urlcolor=mdtRed, % The color of hyperlinks (URLs)
 pdfstartview={FitV},
 unicode,
 breaklinks=true,
