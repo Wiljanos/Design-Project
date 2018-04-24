@@ -1,10 +1,51 @@
-% Appendix Template
+\chapter{Data Collection Parameters} \label{AppendixB}
+\begin{table}[ht]
+\begin{center}
+\caption[Parameter types available from the SmartController regarding the robot]{Parameter types available from the SmartController regarding the robot} \vspace{0.3cm}
+\label{tab:Robot Data Types}
+\begin{tabular}[width=\textwidth]{ p{0.33\textwidth} | p{0.62\textwidth}}
+Parameter & Description \\ [1ex]
+\hline \\
+\parbox[t]{0.3\textwidth}{Bus Voltage} & The current amplifier bus voltage for the robot. \\ [2ex]
+\parbox[t]{0.3\textwidth}{AC Input} & The current AC input voltage (220 VAC) for the robot. \\ [2ex]
+\parbox[t]{0.3\textwidth}{DC Input} & The current DC input voltage (24 VDC) for the robot.\\ [2ex]
+\parbox[t]{0.3\textwidth}{Base Board Temperature} &  The current temperature (in $^\circ$C) for the amp-in-base processor board. \\
+\end{tabular}
+\end{center}
+\end{table}
 
-\chapter{Design Project Planning} \label{AppendixB}
-The execution of the research is planned to last 18 working weeks, November 24th - April 13th including 2 weeks vacations. This time will be divided in three parts: Firstly the Problem Analysis, Literature study and Research Design will be performed. Secondly, the research execution is performed and a artifact will be designed. Lastly, the report will be finalized and a presentation is given about the project. The entire planning is shown in a Gantt Chart depicted in Figure \ref{fig:Planning} . During the execution of the project, adjustments can be made regarding the planning. Therefore, the planning will be updated for every hand-in moment and will be excluded in the final version.
-\begin{figure}[htbp]
-\centering
-\includegraphics[angle=90]{Figures/Research_Planning}
-\caption{Design Project Planning}
-\label{fig:Planning}
-\end{figure}
+\begin{longtable}[width=\textwidth]{ p{0.33\textwidth} | p{0.62\textwidth}}
+\caption[Parameter types available from the SmartController regarding the motors]{Parameter types available from the SmartController regarding the motors} \vspace{0.3cm}
+\label{tab:Motor Data Types} \\
+Parameter & Description \\ [1ex]
+\hline \\
+\parbox[t]{0.33\textwidth}{Amp AC Input} & Monitors the RMS input voltage to amplifier (in volts) for the selected motor.\\ [2ex]
+\parbox[t]{0.33\textwidth}{Amp Bus} & Monitors the high-voltage DC bus (in volts) for the selected motor.\\ [2ex]
+\parbox[t]{0.33\textwidth}{Amp Temperature} & Monitors the amplifier temperature (in $^\circ$C) for the selected motor.\\ [2ex]
+\parbox[t]{0.33\textwidth}{Amplifier Temperature} & The current temperature (in $^\circ$C) for the motor amplifier. This should not exceed the specified limits. \\ [2ex]
+\parbox[t]{0.33\textwidth}{Base Board Temperature} & Monitors the amplifier base-board temperature (in $^\circ$C), per-amp not per motor, for the selected motor.\\ [2ex]
+\parbox[t]{0.33\textwidth}{Bus Energy Filter} & Monitors the Bus Energy Filter for the selected motor.\\ [2ex]
+\parbox[t]{0.33\textwidth}{Commanded Acceleration} & Monitors the commanded acceleration (in counts/ms$^2$) for the selected motor.\\ [2ex]
+\parbox[t]{0.33\textwidth}{Commanded Position} & Monitors the commanded position (in counts) for the selected motor. \\ [2ex]
+\parbox[t]{0.33\textwidth}{Commanded Velocity} & Monitors the commanded velocity (in counts/ms) for the selected motor.\\ [2ex]
+\parbox[t]{0.33\textwidth}{Current Loop Output} & Monitors the output of the 'PI' current loop for the selected motor.\\ [2ex]
+\parbox[t]{0.33\textwidth}{Current Peak-to-Peak Output} & Monitors the peak output of the 'PI' current loop for the selected motor.\\ [2ex]
+\parbox[t]{0.33\textwidth}{DC Input Voltage} & Monitors the DC control voltage (in volts) for the selected motor\\ [2ex]
+\parbox[t]{0.33\textwidth}{Duty Cycle} & The current duty cycle value, as a percentage, for the selected motor. \\ [2ex]
+\parbox[t]{0.33\textwidth}{Duty Cycle Limit} & Specifies the maximum allowable value for the Duty Cycle. When Duty Cycle Level = Duty Cycle Limit, the robot is stopped to protect the motor. See Duty Cycle Level and Peak Duty Cycle. \\ [2ex]
+\parbox[t]{0.33\textwidth}{Encoder Position} & Monitors the actual position (in counts) for the selected motor.\\ [2ex]
+\parbox[t]{0.33\textwidth}{Encoder Temperature} & Monitors the encoder temperature (in $^\circ$C) for the selected motor.\\ [2ex]
+\parbox[t]{0.33\textwidth}{Encoder Velocity} & Monitors the actual velocity, in counts/ms, for the selected motor.\\ [2ex]
+\parbox[t]{0.33\textwidth}{E-Stop Status} & Monitors the E-stop status register for the selected motor.\\ [2ex]
+\parbox[t]{0.33\textwidth}{Index Delta} & Monitors the index delta (last index position minus previous index position), in counts, for the selected motor. \\ [2ex]
+\parbox[t]{0.33\textwidth}{Last Motion Settling Time} & Monitors the motor settling time (in milliseconds) of the last motion completed for the selected motor.\\ [2ex]
+\parbox[t]{0.33\textwidth}{Latched Errors} & Monitors the latched error bit mask for the selected motor. For possible values and their descriptions, see the topic MotorLatchedErrorBits Enumeration in the ACE API Documentation Help file. You can access this file by selecting Help > ACE API Reference from the ACE software menu. \\ [2ex]
+\parbox[t]{0.33\textwidth}{Output Level} & Monitors the output level, typically a torque command between -32768 and 32767, for the selected motor.\\ [2ex]
+\parbox[t]{0.33\textwidth}{Peak Duty Cycle} & Monitors the largest Duty Cycle value that has been reached since the last controller boot. This allows you to see if the robot is approaching the Duty Cycle Limit. See Duty Cycle Level and Duty Cycle Limit.\\ [2ex]
+\parbox[t]{0.33\textwidth}{Peak Position Error} & The peak position error, as a percentage of soft envelope error, for the selected motor.\\ [2ex]
+\parbox[t]{0.33\textwidth}{Peak Torque} & The peak torque, as a percentage based on maximum torque, for the selected motor.\\ [2ex]
+\parbox[t]{0.33\textwidth}{Position Error} & Monitors the position error (commanded position minus actual encoder position), in counts, for the selected motor. \\ [2ex]
+\parbox[t]{0.33\textwidth}{Servo Status} & Monitors the servo status bit mask for the selected motor. For possible values and their descriptions, see the topic MotorStatusBits Enumeration in the ACE API Documentation Help file. You can access this file by selecting Help > API Reference from the ACE software menu.\\ [2ex]
+\parbox[t]{0.33\textwidth}{Unlatched Errors} & Monitors the unlatched error bit mask for the selected motor. For possible values and their descriptions, see the topic MotorUnlatchedErrorBits Enumeration in the ACE API Documentation Help file. You can access this file by selecting Help > API Reference from the ACE software menu. \\ [2ex]
+\parbox[t]{0.33\textwidth}{Velocity Error} & Monitors the velocity error (commanded velocity minus encoder velocity), in counts/ms, for the selected motor. \\ [2ex]
+\end{longtable}

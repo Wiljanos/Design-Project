@@ -52,6 +52,7 @@ headsepline, % Uncomment to get a line under the header
 \usepackage{amssymb}
 \usepackage{mathtools}
 \usepackage{dsfont}
+\usepackage{multicol}
 \usepackage{relsize}
 \usepackage{amsmath}
 \usepackage{algorithm}
@@ -66,7 +67,10 @@ headsepline, % Uncomment to get a line under the header
 \usepackage{siunitx}
 \usepackage{color}
 \usepackage{listings}
+\usepackage{longtable}
 \usepackage{setspace}
+\newcolumntype{L}{>{\arraybackslash}p{0.7\textwidth}}
+\newcolumntype{G}{>{\arraybackslash}p{0.3\textwidth}}
 \usepackage{tikz}
 \usetikzlibrary{shapes,arrows}
 \usepackage{verbatim}
@@ -285,6 +289,7 @@ Acknowledgements
 \textbf{CM} & \textbf{C}orrective \textbf{M}aintenance\\
 \textbf{CMMS} & \textbf{C}omputerized \textbf{M}aintenance \textbf{M}anagement \textbf{S}ystem \\
 \textbf{CUSTO} & \textbf{Custo}mization \\
+\textbf{DI} & \textbf{D}egradation \textbf{I}ndicator \\
 \textbf{DUM} & \textbf{D}riving \textbf{U}nit \textbf{A}ssembly \\
 \textbf{HCA} & \textbf{H}air \textbf{C}hamber \textbf{A}ssembly \\
 \textbf{HMI} & \textbf{H}uman \textbf{M}achine \textbf{I}nterface\\
@@ -293,10 +298,12 @@ Acknowledgements
 \textbf{MCSA} & \textbf{M}otor \textbf{C}urrent \textbf{S}ignature \textbf{A}nalysis \\
 \textbf{OG} & \textbf{O}ndersteundende \textbf{G}roep\\
 \textbf{OTD} & \textbf{O}nderhoud \textbf{T}echnische \textbf{D}ienst \\
+\textbf{PCA} & \textbf{P}rincipal \textbf{C}omponent \textbf{A}nalysis \\
+\textbf{PDF} & \textbf{P}robability \textbf{D}ensity \textbf{F}unction \\
 \textbf{POR} & \textbf{P}ractice \textbf{O}riented \textbf{R}esearch \\
 \textbf{RAC} & \textbf{R}obot \textbf{A}ssembly \textbf{C}ell\\
 \textbf{R\&D} & \textbf{R}esearch \textbf{}and \textbf{D}evelopment\\
-\textbf{RUL} & \textbf{R}emainging \textbf{U}seful \textbf{L}ife\\
+\textbf{RUL} & \textbf{R}emaining \textbf{U}seful \textbf{L}ife\\
 \textbf{SCARA} & \textbf{S}elective \textbf{C}ompliance \textbf{A}ssembly \textbf{R}obot \textbf{A}rm\\
 \textbf{SUA} & \textbf{S}have \textbf{U}nit \textbf{A}ssembly \\
 \textbf{TBM} & \textbf{T}ime \textbf{B}ased \textbf{M}aintenance\\
@@ -356,6 +363,7 @@ Acknowledgements
 \appendix % Cue to tell LaTeX that the following "chapters" are Appendices
 \include{Appendices/AppendixA}
 \include{Appendices/AppendixB}
+\include{Appendices/AppendixC}
 %----------------------------------------------------------------------------------------
 
 %	BIBLIOGRAPHY
